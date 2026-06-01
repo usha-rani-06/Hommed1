@@ -1,2 +1,15 @@
+[project]
+name = "hommed-backend"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "Flask==3.0.3",
+  "flask-cors==5.0.0",
+  "python-dotenv==1.0.1",
+  "pymongo==4.10.1",
+  "PyJWT==2.9.0",
+  "bcrypt==4.2.0",
+]
+
 [tool.vercel]
 entrypoint = "run:app"
