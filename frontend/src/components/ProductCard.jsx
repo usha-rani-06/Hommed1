@@ -56,7 +56,7 @@ export const ProductCard = ({ product, isFeatured = false }) => {
                 {product.name}
               </Link>
             </h3>
-            <strong>${product.price.toFixed(2)}</strong>
+            <strong>₹{product.price}</strong>
           </div>
           <p className="product-desc">{product.desc}</p>
         </div>

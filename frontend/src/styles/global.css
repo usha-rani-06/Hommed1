@@ -1455,7 +1455,7 @@ svg {
 .nutrition-header {
   position: relative;
   z-index: 2;
-  max-width: 650px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
@@ -1485,17 +1485,16 @@ svg {
   z-index: 2;
   width: 920px;
   max-width: 100%;
-  height: 450px;
   margin: 38px auto 0;
+  display: flex;
+  justify-content: center;
 }
 
 .nutrition-stage>img {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 684px;
+  display: block;
+  width: 100%;
+  max-width: 684px;
   height: auto;
-  transform: translateX(-50%);
   pointer-events: none;
 }
 
@@ -1616,11 +1615,10 @@ svg {
   .nutrition-stage {
     height: auto;
     margin-top: 34px;
-    padding-top: min(75vw, 513px);
+    padding-top: 0;
   }
 
   .nutrition-stage>img {
-    top: 0;
     width: min(100%, 684px);
   }
 
@@ -2031,6 +2029,7 @@ svg {
   flex: 0 0 auto;
   align-items: flex-start;
   gap: 23px;
+  padding-right: 23px;
   width: max-content;
   animation: testimonial-slide-left 20s linear infinite;
   will-change: transform;
@@ -2087,7 +2086,7 @@ svg {
 }
 
 .testimonial-card-two {
-  margin-top: 88px;
+  margin-top: 0;
 }
 
 .testimonial-card-three {
@@ -2095,7 +2094,7 @@ svg {
 }
 
 .testimonial-card-four {
-  margin-top: 88px;
+  margin-top: 0;
   opacity: .95;
 }
 
@@ -2216,9 +2215,9 @@ svg {
   }
 
   .testimonial-track {
-    width: 100%;
-    overflow-x: auto;
+    width: max-content;
     gap: 16px;
+    padding-right: 16px;
     margin-top: 40px;
     padding-bottom: 12px;
   }
@@ -2341,6 +2340,8 @@ svg {
   background: linear-gradient(126deg, #6B4105 0%, #221000 100%);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03), 0 16px 30px rgba(28, 14, 0, .18);
   transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -2399,6 +2400,7 @@ svg {
 .product-info {
   display: block;
   padding: 29px 5px 0;
+  flex-grow: 1;
 }
 
 .product-header-row {
@@ -2465,7 +2467,7 @@ svg {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 65px;
+  min-height: 65px;
   border-radius: 8px;
   cursor: pointer;
   font-family: "Geist", "Poppins", Arial, sans-serif;
@@ -2648,7 +2650,7 @@ svg {
   }
 
   .product-actions button {
-    height: 56px;
+    min-height: 56px;
     font-size: 18px;
   }
 
@@ -2921,7 +2923,7 @@ svg {
   position: relative;
   min-height: 700px;
   overflow: hidden;
-  background: url("../assets/bg honey.png") center top / cover no-repeat;
+  background: url("../assets/anjeer\ add.jpeg") center top / cover no-repeat;
 }
 
 .figma-honey-copy {
@@ -4068,7 +4070,7 @@ svg {
   width: 526px;
   height: 731px;
   object-fit: contain;
-  opacity: .18;
+  opacity: .4;
   pointer-events: none;
 }
 
@@ -4080,7 +4082,7 @@ svg {
 .hero-honeycomb-center {
   left: 44%;
   top: 4px;
-  opacity: .14;
+  opacity: .35;
 }
 
 .menu-card-honeycomb {
@@ -8846,7 +8848,7 @@ button,
 .hero-honeycomb {
   position: absolute;
   z-index: 1;
-  opacity: 4;
+  opacity: .4;
   mix-blend-mode: multiply;
 }
 
@@ -8856,7 +8858,7 @@ button,
 
 .hero-honeycomb-center {
   width: 360px;
-  opacity: .15;
+  opacity: .35;
 }
 
 .hero-honeycomb-right {
@@ -9962,6 +9964,7 @@ button,
 
 /* Focused mobile refinements for cart, account status, and wishlist. */
 @media (max-width: 700px) {
+
   .cart-page-container,
   .profile-page-container,
   .wishlist-page-container {
@@ -10607,6 +10610,7 @@ button,
 }
 
 @media (max-width: 380px) {
+
   .details-weight-section>div,
   .carousel-grid-new {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -10768,6 +10772,7 @@ button,
 }
 
 @media (max-width: 768px) {
+
   :where(.hero,
     .purity-section,
     .origin-section,

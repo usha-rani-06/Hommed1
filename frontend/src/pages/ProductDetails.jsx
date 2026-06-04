@@ -8,7 +8,7 @@ export const ProductDetails = () => {
   const { allProducts, getImageUrl, addToCart, wishlist, toggleWishlist } = useCart();
 
   // Safeguard ID
-  const activeId = allProducts[id] ? id : 'prod-wild-forest';
+  const activeId = allProducts[id] ? id : 'prod-honey-450g';
   const currentProduct = allProducts[activeId];
   const isWishlisted = wishlist.includes(currentProduct.id);
 
@@ -68,12 +68,12 @@ export const ProductDetails = () => {
 
   return (
     <div className="details-body" style={{ minHeight: '100vh', background: '#FAF8F5', position: 'relative', overflowX: 'hidden', paddingBottom: '100px' }}>
-      
+
       {/* Background blurs */}
       <div className="d-blur-1" aria-hidden="true" style={{ position: 'absolute', top: '5%', left: '-10%', width: '50vw', height: '50vw', borderRadius: '50%', filter: 'blur(120px)', zIndex: 1, pointerEvents: 'none', opacity: 0.15 }}></div>
 
       <main className="details-container" style={{ maxWidth: '1200px', margin: '120px auto 0', padding: '0 24px', position: 'relative', zIndex: 5 }}>
-        
+
         {/* Breadcrumbs (Mockup Style) */}
         <nav className="details-breadcrumbs" aria-label="Breadcrumbs" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', fontFamily: "'Poppins', sans-serif", marginBottom: '24px' }}>
           <Link to="/" style={{ color: '#7E7870', textDecoration: 'none' }}>Home</Link>
@@ -85,12 +85,12 @@ export const ProductDetails = () => {
 
         {/* 2-Column Product Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '48px', alignItems: 'start' }} className="product-main-grid-new">
-          
+
           {/* Column 1: Image & Thumbnail Gallery */}
           <section className="gallery-section">
             {/* Viewport Box */}
             <div className="details-gallery-frame" style={{ position: 'relative', background: '#FFFFFF', border: '1px solid #ECE7E0', borderRadius: '16px', height: '480px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px', boxSizing: 'border-box', overflow: 'hidden' }}>
-              
+
               {/* Bestseller Badge */}
               {currentProduct.isBestseller && (
                 <span style={{ position: 'absolute', top: '20px', left: '20px', background: '#D48C00', color: '#FFFFFF', padding: '6px 14px', borderRadius: '50px', fontSize: '12px', fontWeight: 700, fontFamily: "'Poppins', sans-serif", zIndex: 5, letterSpacing: '0.02em' }}>
@@ -173,7 +173,7 @@ export const ProductDetails = () => {
           <section className="product-details-pane" style={{ display: 'flex', flexDirection: 'column' }}>
             <h1 style={{ fontFamily: "'Instrument Sans', 'Georgia', serif", fontSize: '38px', fontWeight: 700, color: '#1E1E1E', margin: '0 0 4px', lineHeight: '1.2' }}>{currentProduct.name}</h1>
             <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14.5px', color: '#7E7870', margin: '0 0 16px', fontWeight: 500 }}>100% Pure • Raw • Unfiltered</p>
-            
+
             {/* Rating reviews metrics */}
             <div className="details-rating-row" style={{ display: 'flex', alignItems: 'center', gap: '14px', borderBottom: '1px solid #ECE7E0', paddingBottom: '18px', marginBottom: '18px', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -481,7 +481,7 @@ export const ProductDetails = () => {
             {activeTab === 'reviews' && (
               <div style={{ fontFamily: "'Poppins', sans-serif" }}>
                 <h3 style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: '18px', color: '#1E1E1E', margin: '0 0 20px' }}>Customer Reviews ({currentProduct.reviewsCount || 100})</h3>
-                
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   {[
                     { author: 'Meera Sharma', rating: 5, date: 'May 28, 2026', title: 'Truly natural taste!', text: 'This wild forest honey is beautiful. It carries a genuine floral aroma and is not sickly sweet like regular syrups. Will order the 1kg next.' },
@@ -537,9 +537,9 @@ export const ProductDetails = () => {
                   <h4 style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: '14px', fontWeight: 700, color: '#1E1E1E', margin: '12px 0 4px', textDecoration: 'none', height: '36px', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                     <Link to={`/product/${prod.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>{prod.name}</Link>
                   </h4>
-                  
+
                   <span style={{ fontSize: '12px', color: '#7E7870', fontFamily: "'Poppins', sans-serif" }}>{prod.weight || '500g'}</span>
-                  
+
                   <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginTop: '6px', fontSize: '11px' }}>
                     {renderStars(prod.rating)}
                     <span style={{ color: '#7E7870', marginLeft: '2px' }}>({prod.reviewsCount || 100})</span>

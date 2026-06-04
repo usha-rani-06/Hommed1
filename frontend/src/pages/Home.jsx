@@ -37,16 +37,16 @@ export const Home = () => {
   const [activeHeroCard, setActiveHeroCard] = useState(0);
   const currentHeroCard = heroCards[activeHeroCard];
 
-  const featuredProductIds = ['prod-wild-forest', 'prod-organic-raw', 'prod-himalayan'];
+  const featuredProductIds = ['prod-anjeer', 'prod-sunflower-seeds', 'prod-honey-1kg'];
   const testimonialCards = [
-    { name: '- Aarav Mehta', role: 'Social Media Manager', className: 'testimonial-card-one' },
-    { name: '- Nisha Rao', role: 'Wellness Coach', className: 'testimonial-card-two' },
-    { name: '- Kabir Sethi', role: 'Founder', className: 'testimonial-card-three' },
-    { name: '- Diya Kapoor', role: 'Home Chef', className: 'testimonial-card-four' },
-    { name: '- Rohan Shah', role: 'Fitness Trainer', className: 'testimonial-card-one' },
-    { name: '- Tara Iyer', role: 'Nutrition Writer', className: 'testimonial-card-two' },
-    { name: '- Meera Jain', role: 'Product Designer', className: 'testimonial-card-three' },
-    { name: '- Dev Malhotra', role: 'Brand Strategist', className: 'testimonial-card-four' }
+    { name: '- Aarav Mehta', role: 'Social Media Manager', className: 'testimonial-card-one', image: 'TESTIMONIAL 1.png' },
+    { name: '- Nisha Rao', role: 'Wellness Coach', className: 'testimonial-card-two', image: 'TESTIMONIAL 2.png' },
+    { name: '- Kabir Sethi', role: 'Founder', className: 'testimonial-card-three', image: 'TESTIMONIAL 3.png' },
+    { name: '- Diya Kapoor', role: 'Home Chef', className: 'testimonial-card-four', image: 'TESTIMONIAL 4.png' },
+    { name: '- Rohan Shah', role: 'Fitness Trainer', className: 'testimonial-card-one', image: 'TESTIMONIAL 5.png' },
+    { name: '- Tara Iyer', role: 'Nutrition Writer', className: 'testimonial-card-two', image: 'TESTIMONIAL 6.png' },
+    { name: '- Meera Jain', role: 'Product Designer', className: 'testimonial-card-three', image: 'TESTIMONIAL 7.png' },
+    { name: '- Dev Malhotra', role: 'Brand Strategist', className: 'testimonial-card-four', image: 'TESTIMONIAL 8.png' }
   ];
 
   const handleBuyNow = (productId) => {
@@ -66,13 +66,6 @@ export const Home = () => {
     setActiveHeroCard((current) => (current + 1) % heroCards.length);
   };
 
-  useEffect(() => {
-    const slideTimer = window.setInterval(() => {
-      setActiveHeroCard((current) => (current + 1) % heroCards.length);
-    }, 3000);
-
-    return () => window.clearInterval(slideTimer);
-  }, [heroCards.length]);
 
   return (
     <>
@@ -382,29 +375,12 @@ export const Home = () => {
         <img className="nutrition-honeycomb nutrition-honeycomb-right" src={getImageUrl('Group 1.png')} alt="" aria-hidden="true" />
 
         <header className="nutrition-header">
-          <h2>More Than Just Honey</h2>
-          <p>Built around clean ingredients and everyday wellness.</p>
+          <h2>Naturally Delicious Purley Anjeer</h2>
+          <p>sun-dried to perfection.Naturally rich in goodness</p>
         </header>
 
         <div className="nutrition-stage">
-          <img src={getImageUrl('honey items .png')} alt="Honey bowl with botanicals, citrus, mint, ginger, and seeds" />
-
-          <div className="nutrition-callout callout-phyto">
-            <span>Phytonutrients</span>
-            <i></i>
-          </div>
-          <div className="nutrition-callout callout-vitamin-b">
-            <span>Vitamin<br />B Complex</span>
-            <i></i>
-          </div>
-          <div className="nutrition-callout callout-antibacterial">
-            <i></i>
-            <span>Antibacterial</span>
-          </div>
-          <div className="nutrition-callout callout-vitamin-c">
-            <i></i>
-            <span>Vitamin C</span>
-          </div>
+          <img src={getImageUrl('anjeer copy.png')} alt="Honey bowl with botanicals, citrus, mint, ginger, and seeds" />
         </div>
       </section>
 
@@ -424,7 +400,7 @@ export const Home = () => {
             <div className="testimonial-track" aria-hidden={loopIndex === 1} key={loopIndex}>
               {testimonialCards.map((item) => (
                 <article className={`testimonial-card ${item.className}`} key={`${loopIndex}-${item.name}`}>
-                  <img className="testimonial-photo" src={getImageUrl('chiru.png')} alt={loopIndex === 0 ? 'Customer portrait' : ''} />
+                  <img className="testimonial-photo" src={getImageUrl(item.image)} alt={loopIndex === 0 ? 'Customer portrait' : ''} />
                   <div className="testimonial-stars" aria-label="4 out of 5 stars">
                     <span>★</span><span>★</span><span>★</span><span>★</span><span className="star-empty">☆</span>
                   </div>
@@ -441,7 +417,7 @@ export const Home = () => {
 
         <div className="testimonial-track testimonial-track-static-hidden" aria-hidden="true">
           <article className="testimonial-card testimonial-card-one">
-            <img className="testimonial-photo" src={getImageUrl('chiru.png')} alt="Customer portrait" />
+            <img className="testimonial-photo" src={getImageUrl('TESTIMONIAL 1.png')} alt="Customer portrait" />
             <div className="testimonial-stars" aria-label="4 out of 5 stars">
               <span>★</span><span>★</span><span>★</span><span>★</span><span className="star-empty">☆</span>
             </div>
@@ -453,7 +429,7 @@ export const Home = () => {
           </article>
 
           <article className="testimonial-card testimonial-card-two">
-            <img className="testimonial-photo" src={getImageUrl('chiru.png')} alt="Customer portrait" />
+            <img className="testimonial-photo" src={getImageUrl('TESTIMONIAL 2.png')} alt="Customer portrait" />
             <div className="testimonial-stars" aria-label="4 out of 5 stars">
               <span>★</span><span>★</span><span>★</span><span>★</span><span className="star-empty">☆</span>
             </div>
@@ -465,7 +441,7 @@ export const Home = () => {
           </article>
 
           <article className="testimonial-card testimonial-card-three">
-            <img className="testimonial-photo" src={getImageUrl('chiru.png')} alt="Customer portrait" />
+            <img className="testimonial-photo" src={getImageUrl('TESTIMONIAL 3.png')} alt="Customer portrait" />
             <div className="testimonial-stars" aria-label="4 out of 5 stars">
               <span>★</span><span>★</span><span>★</span><span>★</span><span className="star-empty">☆</span>
             </div>
@@ -477,7 +453,7 @@ export const Home = () => {
           </article>
 
           <article className="testimonial-card testimonial-card-four" aria-hidden="true">
-            <img className="testimonial-photo" src={getImageUrl('chiru.png')} alt="" />
+            <img className="testimonial-photo" src={getImageUrl('TESTIMONIAL 4.png')} alt="" />
             <div className="testimonial-content">
               <h3>“It doesn’t taste processed — and that changes everything.”</h3>
               <p>- Aarav Mehta</p>
@@ -521,25 +497,25 @@ export const Home = () => {
 
         <div className="blogs-grid">
           <article className="blog-card blog-card-one">
-            <img src={getImageUrl('Rectangle 4033.png')} alt="Honey dipper pouring honey onto a spoon" />
+            <img src={getImageUrl('sunflower seeds.png')} alt="Honey dipper pouring honey onto a spoon" />
             <time dateTime="2026-01-27">27th Jan, 2026</time>
-            <h3>How Pure Is the Honey You Consume Every Day?</h3>
+            <h3>How Pure Is the Snack You Choose Every Day?</h3>
           </article>
 
           <article className="blog-card blog-card-two">
-            <img src={getImageUrl('Rectangle 4033.png')} alt="Honey dipper pouring honey onto a spoon" />
+            <img src={getImageUrl('pumpkin seeds.png')} alt="Honey dipper pouring honey onto a spoon" />
             <time dateTime="2026-01-27">27th Jan, 2026</time>
-            <h3>From Hive to Jar: What Really Makes Honey Natural</h3>
+            <h3>From Shell to Seed: The Journey of a Pumpkin Seed</h3>
           </article>
 
           <article className="blog-card blog-card-three">
-            <img src={getImageUrl('Rectangle 4033.png')} alt="Honey dipper pouring honey onto a spoon" />
+            <img src={getImageUrl('ws.png')} alt="Honey dipper pouring honey onto a spoon" />
             <time dateTime="2026-01-27">27th Jan, 2026</time>
-            <h3>Why Minimal Processing Matters More Than You Think</h3>
+            <h3>Why Nutrient Density Matters More Than You Think</h3>
           </article>
 
           <article className="blog-card blog-card-four">
-            <img src={getImageUrl('Rectangle 4033.png')} alt="Honey dipper pouring honey onto a spoon" />
+            <img src={getImageUrl('CHIA SEEDS.png')} alt="Honey dipper pouring honey onto a spoon" />
             <time dateTime="2026-01-27">27th Jan, 2026</time>
             <h3>What Clean Nutrition Actually Looks Like</h3>
           </article>

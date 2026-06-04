@@ -98,22 +98,26 @@ export const Shop = () => {
     // Weight Filter
     if (selectedWeights.length > 0) {
       let matched = false;
-      if (selectedWeights.includes(prod.weight)) {
-        matched = true;
-      } else if (selectedWeights.includes('1.5kg+') && (prod.weight === '1.5kg' || prod.weight === '2kg' || prod.weight === '1kg')) {
-        // Safe mapping
-        matched = true;
-      }
+      const weightNum = parseFloat(prod.weight);
+      const isKg = prod.weight.toLowerCase().includes('kg');
+      const actualWeightGrams = isKg ? weightNum * 1000 : weightNum;
+
+      selectedWeights.forEach(w => {
+        if (w === 'Under 100g' && actualWeightGrams < 100) matched = true;
+        else if (w === '100g-200g' && actualWeightGrams >= 100 && actualWeightGrams <= 200) matched = true;
+        else if (w === prod.weight) matched = true;
+        else if (w === '1kg' && actualWeightGrams === 1000) matched = true;
+      });
       if (!matched) return false;
     }
     // Benefits Filter
     if (selectedBenefits.length > 0) {
       const benefitMapping = {
-        'Immunity Booster': ['prod-wild-forest', 'prod-organic-raw', 'prod-himalayan', 'prod-sidr-royal', 'prod-kashmir-saffron', 'prod-tulsi'],
-        'Energy Booster': ['prod-natural-bee', 'prod-wild-forest', 'prod-sunflower', 'prod-clover', 'prod-eucalyptus'],
-        'For Skin': ['prod-acacia', 'prod-kashmir-saffron', 'prod-litchi', 'prod-neem'],
-        'For Weight Management': ['prod-jamun', 'prod-ginger', 'prod-organic-raw'],
-        'General Wellness': ['prod-multi-floral', 'prod-sundarban', 'prod-duet-combo', 'prod-gift-pack', 'prod-nuts-hamper']
+        'Immunity Booster': ['prod-honey-15g', 'prod-honey-30g', 'prod-honey-50g', 'prod-honey-100g', 'prod-honey-200g', 'prod-honey-450g', 'prod-honey-1kg', 'prod-chia-seeds'],
+        'Energy Booster': ['prod-honey-100g', 'prod-honey-200g', 'prod-honey-450g', 'prod-honey-1kg', 'prod-pumpkin-seeds', 'prod-sunflower-seeds'],
+        'For Skin': ['prod-honey-200g', 'prod-honey-450g', 'prod-honey-1kg', 'prod-chia-seeds', 'prod-anjeer'],
+        'For Weight Management': ['prod-honey-15g', 'prod-honey-30g', 'prod-honey-50g', 'prod-chia-seeds', 'prod-pumpkin-seeds'],
+        'General Wellness': ['prod-honey-15g', 'prod-honey-30g', 'prod-honey-50g', 'prod-honey-100g', 'prod-honey-200g', 'prod-honey-450g', 'prod-honey-1kg', 'prod-pumpkin-seeds', 'prod-sunflower-seeds', 'prod-chia-seeds', 'prod-watermelon-seeds', 'prod-anjeer', 'prod-duet-combo', 'prod-gift-pack']
       };
       const isEligible = selectedBenefits.some(b => benefitMapping[b]?.includes(prod.id));
       if (!isEligible) return false;
@@ -198,51 +202,56 @@ export const Shop = () => {
           <div className="filter-block" style={{ background: '#FFFFFF', border: '1px solid #ECE7E0', borderRadius: '12px', padding: '24px', boxSizing: 'border-box' }}>
             <h4 className="filter-block-title" style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: '16px', fontWeight: 700, color: '#1E1E1E', margin: '0 0 18px', borderBottom: '1px solid #F5F2EC', paddingBottom: '10px' }}>Categories</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              {[
-                { name: 'All Products', count: '24', value: '' },
-                { name: 'Raw Honey', count: '06', value: 'raw-honey' },
-                { name: 'Wild Forest Honey', count: '06', value: 'wild-forest-honey' },
-                { name: 'Organic Honey', count: '05', value: 'organic-honey' },
-                { name: 'Premium Collection', count: '04', value: 'premium-collection' },
-                { name: 'Gift Packs', count: '03', value: 'gift-packs' }
-              ].map((cat) => {
-                const isActive = cat.value === '' 
-                  ? selectedCategories.length === 0 
-                  : selectedCategories.includes(cat.value);
-                return (
-                  <button
-                    key={cat.name}
-                    type="button"
-                    onClick={() => {
-                      if (cat.value === '') {
-                        setSelectedCategories([]);
-                      } else {
-                        setSelectedCategories([cat.value]);
-                      }
-                    }}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      width: '100%',
-                      padding: '10px 12px',
-                      background: isActive ? '#FAF6F0' : 'transparent',
-                      border: 'none',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      fontFamily: "'Poppins', sans-serif",
-                      fontSize: '14.5px',
-                      fontWeight: isActive ? 700 : 500,
-                      color: isActive ? '#D48C00' : '#4E4840',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <span>{cat.name}</span>
-                    <span style={{ fontSize: '12px', opacity: 0.7, fontWeight: isActive ? 700 : 500 }}>{cat.count}</span>
-                  </button>
-                );
-              })}
+              {(() => {
+                const getCount = (catVal) => {
+                  if (!catVal) return Object.keys(allProducts).length;
+                  return Object.values(allProducts).filter(p => p.category === catVal).length;
+                };
+                return [
+                  { name: 'All Products', count: String(getCount('')).padStart(2, '0'), value: '' },
+                  { name: 'Raw Honey', count: String(getCount('raw-honey')).padStart(2, '0'), value: 'raw-honey' },
+                  { name: 'Healthy Seeds', count: String(getCount('seeds')).padStart(2, '0'), value: 'seeds' },
+                  { name: 'Premium Collection', count: String(getCount('premium-collection')).padStart(2, '0'), value: 'premium-collection' },
+                  { name: 'Gift Packs', count: String(getCount('gift-packs')).padStart(2, '0'), value: 'gift-packs' }
+                ].map((cat) => {
+                  const isActive = cat.value === '' 
+                    ? selectedCategories.length === 0 
+                    : selectedCategories.includes(cat.value);
+                  return (
+                    <button
+                      key={cat.name}
+                      type="button"
+                      onClick={() => {
+                        if (cat.value === '') {
+                          setSelectedCategories([]);
+                        } else {
+                          setSelectedCategories([cat.value]);
+                        }
+                      }}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
+                        padding: '10px 12px',
+                        background: isActive ? '#FAF6F0' : 'transparent',
+                        border: 'none',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        fontFamily: "'Poppins', sans-serif",
+                        fontSize: '14.5px',
+                        fontWeight: isActive ? 700 : 500,
+                        color: isActive ? '#D48C00' : '#4E4840',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      <span>{cat.name}</span>
+                      <span style={{ fontSize: '12px', opacity: 0.7, fontWeight: isActive ? 700 : 500 }}>{cat.count}</span>
+                    </button>
+                  );
+                });
+              })()}
             </div>
           </div>
 
@@ -278,7 +287,7 @@ export const Shop = () => {
           <div className="filter-block" style={{ background: '#FFFFFF', border: '1px solid #ECE7E0', borderRadius: '12px', padding: '24px', boxSizing: 'border-box' }}>
             <h4 className="filter-block-title" style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: '16px', fontWeight: 700, color: '#1E1E1E', margin: '0 0 18px', borderBottom: '1px solid #F5F2EC', paddingBottom: '10px' }}>By Weight</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              {['250g', '500g', '750g', '1kg', '1.5kg+'].map((w) => (
+              {['200g', '250g', '500g', '750g', '1kg', '1.5kg+'].map((w) => (
                 <label key={w} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px', fontFamily: "'Poppins', sans-serif", color: '#4E4840', cursor: 'pointer', userSelect: 'none' }}>
                   <input
                     type="checkbox"
